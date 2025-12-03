@@ -2,7 +2,7 @@ var sumInvalidIDs = 0;
 var input = "";
 
 // Get input
-async function getInput(getSolution) {
+async function getInput() {
 	try {
 		const response = await fetch('./input.txt');
 		if (!response.ok) {
@@ -11,15 +11,13 @@ async function getInput(getSolution) {
 		
 		input = await response.text();
 		
-		getSolution();
-		
 	} catch (error) {
 		console.error(error.message);
 	}	
 }
 
 // Get solution
-function getSolution() {
+getInput().then(function () {
 	const IDranges = input.split(',');
 	
 	for (var i = 0; i < IDranges.length; i++) {
@@ -43,8 +41,4 @@ function getSolution() {
 	}
 
 	console.log('Solution: ' + sumInvalidIDs);
-}
-
-
-// Run things
-getInput(getSolution);
+});
