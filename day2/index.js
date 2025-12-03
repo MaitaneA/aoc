@@ -22,10 +22,11 @@ getInput().then(function () {
 	
 	for (var i = 0; i < IDranges.length; i++) {
 		let range = IDranges[i].split('-');
-		console.log('Range: ' + range[0] + ' to ' + range[1]);
-		
-		rangeStart = Number(range[0]);
-		rangeEnd = Number(range[1]);
+		let rangeStart = Number(range[0]);
+		let rangeEnd = Number(range[1]);
+
+		let outputStr = 'Range: ' + range[0] + ' to ' + range[1];
+		let numInvalids = 0;
 		
 		for (var j = rangeStart; j<= rangeEnd; j++) {
 			let ID = j.toString();
@@ -35,6 +36,14 @@ getInput().then(function () {
 			
 			if (ID.slice(0, midSize/2) == ID.slice(midSize/2)) {
 				console.log('Invalid ID: ' + ID);
+				numInvalids++;
+				if (numInvalids == 1) {
+					outputStr += ' -->  Invalid ID(s): ';
+				} else if (numInvalids > 1) {
+					outputStr += ', ';
+				}
+				outputStr += ID;
+				
 				sumInvalidIDs += j;
 			}
 		}
