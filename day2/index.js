@@ -35,7 +35,6 @@ getInput().then(function () {
 			if (midSize % 2) continue;  // If the number of digits is odd, the ID cannot be invalid - skip it
 			
 			if (ID.slice(0, midSize/2) == ID.slice(midSize/2)) {
-				console.log('Invalid ID: ' + ID);
 				numInvalids++;
 				if (numInvalids == 1) {
 					outputStr += ' -->  Invalid ID(s): ';
@@ -53,4 +52,5 @@ getInput().then(function () {
 	console.log('Solution: ' + sumInvalidIDs);
 
 });
+
 
