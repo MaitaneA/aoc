@@ -47,7 +47,9 @@ getInput().then(function () {
 				sumInvalidIDs += j;
 			}
 		}
+		console.log(str);
 	}
 
 	console.log('Solution: ' + sumInvalidIDs);
+
 });
