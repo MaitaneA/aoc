@@ -69,7 +69,7 @@ getInput().then(function () {
 
 	console.log('Solution: ' + sumInvalidIDs);
 
-//});
+});
 
 // Get solution (part 1)
 /*getInput().then(function () {
@@ -107,3 +107,4 @@ getInput().then(function () {
 	console.log('Solution: ' + sumInvalidIDs);
 
 });*/
+
