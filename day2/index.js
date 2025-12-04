@@ -55,7 +55,6 @@ getInput().then(function () {
 						outputStr += ', ';
 					}
 					outputStr += ID;
-					console.log(outputStr);
 					
 					sumInvalidIDs += j;
 					
@@ -107,5 +106,6 @@ getInput().then(function () {
 	console.log('Solution: ' + sumInvalidIDs);
 
 });*/
+
 
 
