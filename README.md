@@ -10,3 +10,4 @@ Day | Challenge | Completed
 Dec 1 | 1.1 | ⭐
 Dec 2 | 1.2 | ⭐
 Dec 3 | 2.1 | ⭐
+Dec 4 | 2.2 | ⭐
