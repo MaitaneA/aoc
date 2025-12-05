@@ -19,10 +19,8 @@ async function getInput() {
 
 // Get solution (part 1)
 getInput().then(function () {
-	const batteries = input.split(',');
-	
-	for (var i = 0; i < batteries.length; i++) {
-		let battery = batteries[i];
+	for (var i = 0; i < input.length; i++) {
+		let battery = input[i];
 		let outstr = 'Battery: ' + battery + ' -> ';
 		let joltage1 = 0;
 		let joltage2 = 0;
