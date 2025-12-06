@@ -1,4 +1,5 @@
 var sumJoltage = 0;
+//var input = ['987654321111111', '811111111111119', '234234234234278', '818181911112111'];
 var input = [];
 
 // Get input
@@ -17,9 +18,41 @@ async function getInput() {
 	}	
 }
 
-// Get solution (part 1)
+// Get solution (part 2)
 getInput().then(function () {
-	for (var i = 0; i < input.length; i++) {
+	for (let i = 0; i < input.length; i++) {
+		let battery = input[i];
+		let outstr = 'Battery: ' + battery + ' -> ';
+		let batteryStart = 0;
+		let batteryEnd = battery.length;
+		let joltage = '';
+		
+		// Get digits
+		for (let k = 0; k < 12; k++) {
+			for (let j = 9; j >= 1 && !joltage[k]; j--) {
+				let searchRes = battery.slice(batteryStart, batteryEnd - (11-k)).search(j);
+				
+				if (searchRes >= 0) {
+					joltage += j;
+					batteryStart = batteryStart + searchRes + 1;
+					break;
+				}
+			}
+		}
+		
+		sumJoltage += Number(joltage);
+		
+		outstr += 'Joltage: ' + joltage;
+		console.log(outstr);
+	}
+
+	console.log('Solution: ' + sumJoltage);
+
+});
+
+// Get solution (part 1)
+/*getInput().then(function () {
+	for (let i = 0; i < input.length; i++) {
 		let battery = input[i];
 		let outstr = 'Battery: ' + battery + ' -> ';
 		let joltage1 = 0;
@@ -55,4 +88,4 @@ getInput().then(function () {
 	console.log('Solution: ' + sumJoltage);
 
 });
-
+*/
