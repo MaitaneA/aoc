@@ -59,19 +59,25 @@ getInput().then(function () {
 		let d = freshRanges[i][1];
 		
 		console.log('Range [' + a + ', ' + b + '] vs [' + c + ', ' + d + ']');
-		if (c > b) {
+		if (c <= b + 1) {
+			cleanedRangeList[cleanedRangeList.length - 1][1] = Math.max(b, d);
+		} else {
+			cleanedRangeList.push([c,d]);
+		}
+		
+		/*if (c > b) {
 			cleanedRangeList.push(freshRanges[i]);
 		} else if (c <= b && c > a && d > b) {
 			console.log('Situation 2');
 			cleanedRangeList[cleanedRangeList.length - 1][1] = freshRanges[i][1];
 		} else if (c < b && c >= a && d <= b) {
 			console.log('Situation 3');
-			continue;
+			
 		} else if (c < b && c == a && d > b) {
 			console.log('Situation 4');
 			cleanedRangeList.pop();
 			cleanedRangeList.push(freshRanges[i]);
-		}
+		}*/
 	}
 	
 	for (let i = 0; i < cleanedRangeList.length; i++) {
