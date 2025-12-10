@@ -1,7 +1,7 @@
 var freshIDs = 0;
 //var input = '3-5\n10-14\n16-20\n12-18\n\n1\n5\n8\n11\n17\n32';
-//var input = ['3-5', '10-14', '16-20', '12-18', '', '1', '5', '8', '11', '17', '32'];
-var input = [];
+var input = ['3-5', '10-14', '16-20', '12-18', '15-22', '23-23', '23-23', '10-10', '14-14', '', '1', '5', '8', '11', '17', '32'];
+//var input = [];
 var freshRanges = [];
 // Only needed for part 1 -> var availableIDs = [];
 
@@ -79,8 +79,9 @@ getInput().then(function () {
 			
 			previousRangeSkip --;
 		} else {
-			previousRangeSkip = -1;
 			freshIDs += (freshRanges[i+previousRangeSkip][1] - freshRanges[i+previousRangeSkip][0] + 1);
+			
+			previousRangeSkip = -1;
 			console.log('freshIDs count is now: ' + freshIDs);
 		}
 	}
