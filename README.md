@@ -16,3 +16,4 @@ Dec 6 | 3.2 | ⭐
 Dec 7 | [4](https://maitanea.github.io/aoc/day4/).1 | ⭐
 Dec 8 | 4.2 | ⭐
 Dec 9 | [5](https://maitanea.github.io/aoc/day5/).1 | ⭐
+Dec 10 | 5.2 | ⭐
