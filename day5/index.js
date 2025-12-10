@@ -3,7 +3,7 @@ var freshIDs = 0;
 //var input = ['3-5', '10-14', '16-20', '12-18', '', '1', '5', '8', '11', '17', '32'];
 var input = [];
 var freshRanges = [];
-var availableIDs = [];
+// Only needed for part 1 -> var availableIDs = [];
 
 
 // Get input
@@ -22,7 +22,73 @@ async function getInput() {
 	}	
 }
 
-function processInput() {
+function compareArrs(a, b) {
+    return a[0] - b[0];
+}
+
+function processInput2() {
+	let rangesProcessing = true;
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] == '') {
+			rangesProcessing = false;
+		} else if (rangesProcessing) {
+			let tempArr = input[i].split('-');
+			freshRanges.push([Number(tempArr[0]), Number(tempArr[1])]);
+		}
+	}
+	
+	freshRanges.sort(compareArrs);
+	console.log('Sorting finished');
+}
+
+// Get solution (part 2)
+getInput().then(function () {
+	processInput2();
+	console.log('Input has been processed & sorted');
+
+	let previousRangeSkip = -1
+	
+	for (let i = 1; i < freshRanges.length; i++) {
+		let skipThisRange = false;
+		
+		// [a,b] & [c,d]
+		let a = freshRanges[i+previousRangeSkip][0];
+		let b = freshRanges[i+previousRangeSkip][1];
+		let c = freshRanges[i][0];
+		let d = freshRanges[i][1];
+		
+		console.log('Range [' + a + ', ' + b + '] vs [' + c + ', ' + d + ']');
+		if (c <= b && c > a && d > b) {
+			console.log('Situation 2');
+			freshRanges[i+previousRangeSkip][1] = freshRanges[i][1];
+			skipThisRange = true;
+		} else if (c < b && c >= a && d <= b) {
+			console.log('Situation 3');
+			skipThisRange = true;
+		} else if (c < b && c == a && d > b) {
+			console.log('Situation 4');
+			continue;
+		}
+		// if c > b no need to do anything
+		
+		
+		if (skipThisRange) {
+			if(i == freshRanges.length - 1) {
+				freshIDs += (freshRanges[i+previousRangeSkip][1] - freshRanges[i+previousRangeSkip][0] + 1);
+			}
+			
+			previousRangeSkip --;
+		} else {
+			previousRangeSkip = -1;
+			freshIDs += (freshRanges[i+previousRangeSkip][1] - freshRanges[i+previousRangeSkip][0] + 1);
+			console.log('freshIDs count is now: ' + freshIDs);
+		}
+	}
+	
+	console.log('Solution: ' + freshIDs);
+});
+
+function processInput1() {
 	let rangesProcessing = true;
 	for (let i = 0; i < input.length; i++) {
 		if (input[i] == '') {
@@ -37,8 +103,8 @@ function processInput() {
 }
 
 // Get solution (part 1)
-getInput().then(function () {
-	processInput();
+/*getInput().then(function () {
+	processInput1();
 	console.log('Input has been processed');
 	
 	for (let i = 0; i < availableIDs.length; i++) {
@@ -56,4 +122,4 @@ getInput().then(function () {
 	
 	console.log('Solution: ' + freshIDs);
 
-});
+});*/
