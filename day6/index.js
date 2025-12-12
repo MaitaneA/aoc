@@ -1,5 +1,5 @@
-var input = ['123 328  51 64 ', ' 45 64  387 23 ', '  6 98  215 314', '*   +   *   +  '];
-//var input = [];
+//var input = ['123 328  51 64 ', ' 45 64  387 23 ', '  6 98  215 314', '*   +   *   +  '];
+var input = [];
 var operations = [];
 var results = [];
 
@@ -20,6 +20,11 @@ async function getInput() {
 	}	
 }
 
+function processInput2() {
+	operations = input[input.length - 1];
+	input.pop();
+}
+
 function trasposeMat(mat) {
 	let newMat = [];
 	
@@ -35,7 +40,7 @@ function trasposeMat(mat) {
 	return newMat;
 }
 
-function processInput() {
+function processInput1() {
 	operations = input[input.length - 1].trim().split(/\s+/);
 	input.pop();
 	
@@ -45,9 +50,56 @@ function processInput() {
 	input = trasposeMat(input);
 }
 
-// Get solution (part 1)
+// Get solution (part 2)
 getInput().then(function () {
-	processInput();
+	processInput2();
+	console.log('Input has been processed');
+	
+	let startPos = 0;
+	let endPos = 0;
+	
+	while (endPos < operations.length) {
+		endPos = operations.slice(startPos + 1).search(/\S/);
+		
+		if (endPos == -1) {
+			endPos = operations.length;
+		} else {
+			endPos = startPos + endPos;
+		}
+		
+		let problem = [];
+		for (let i = 0; i < input.length; i++) {
+			problem.push(input[i].slice(startPos, endPos));
+		}
+		
+		problem = trasposeMat(problem);
+		
+		for (let i = 0; i < problem.length; i++) {
+			problem[i] = problem[i].reduce((str, currentDig) => str + currentDig).trim();
+		}
+		
+		if (operations[startPos] == '+') {
+			results.push( problem.reduce((numb, currentStr) => numb + Number(currentStr), 0) );
+			console.log('Problem starting in position ' + startPos + ' -> result = ' + results[results.length - 1]);
+		} else if (operations[startPos] == '*') {
+			results.push( problem.reduce((numb, currentStr) => numb * Number(currentStr), 1) );
+			console.log('Problem starting in position ' + startPos + ' -> result = ' + results[results.length - 1]);
+		} else {
+			console.log('Something is wrong, startPos = ' + startPos + ' and the operation is missing');
+		}
+		
+		startPos = endPos+1;
+	}
+	
+	let finalResult = results.reduce((sum, currentNumber) => sum + currentNumber);
+	
+	console.log('Solution: ' + finalResult);
+
+});
+
+// Get solution (part 1)
+/*getInput().then(function () {
+	processInput1();
 	console.log('Input has been processed');
 	
 	for (let i = 0; i < input.length; i++) {
@@ -62,4 +114,4 @@ getInput().then(function () {
 	
 	console.log('Solution: ' + finalResult);
 
-});
+});*/
