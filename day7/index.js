@@ -19,7 +19,7 @@ async function getInput() {
 	}	
 }
 
-function processInput1() {
+function processInput() {
 	for (let i = 1; i < input.length; i++) {
 		input[i] = input[i].split('');
 	}
@@ -48,5 +48,6 @@ getInput().then(function () {
 	}
 	
 	console.log('Solution: ' + splits);
+
 
 });
